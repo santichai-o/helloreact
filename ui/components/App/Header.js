@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import FlashMessage from './FlashMessage'
 
 export default class Header extends Component {
   render() {
     return (
       <header>
+        <FlashMessage />
         <nav>
             <Link to={{ pathname: '/' }}>Babel Coder Wiki!</Link>
             <ul>

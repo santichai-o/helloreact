@@ -1,5 +1,7 @@
 import React from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Provider } from 'react-redux'
+import configureStore from '../configureStore'
 
 import {
   App,
@@ -10,12 +12,14 @@ import {
 export default class Root extends React.Component  {
   render() {
     return (
-      <Router history={browserHistory} key={Math.random()}>
-        <Route path='/' component={App}>
-          <IndexRoute component={Home} />
-          <route path='pages' component={Pages} />
-        </Route>
-      </Router>
+      <Provider store={configureStore()} key='provider'>
+        <Router history={browserHistory} key={Math.random()}>
+          <Route path='/' component={App}>
+            <IndexRoute component={Home} />
+            <route path='pages' component={Pages} />
+          </Route>
+        </Router>
+      </Provider>
     )
   }
 }

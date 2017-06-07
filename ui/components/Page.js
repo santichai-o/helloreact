@@ -1,18 +1,15 @@
 import React from 'react'
 
-export const Page = (props) => {
-    const { id, title } = props.page
-
-    //console.log(props.onReloadPages)
+export const Page = ({ page, onPageEdit }) => {
 
 	return(
 		<tr>
-            <th>{id}</th>
-            <td>{title}</td>
+            <th>{page.id}</th>
+            <td>{page.title}</td>
             <td>
                  <button 
                     className='button'
-                    onClick={() => props.onPageEdit(id)}>
+                    onClick={() => onPageEdit(page.id)}>
                     Reload Pages
                 </button>
             </td>
