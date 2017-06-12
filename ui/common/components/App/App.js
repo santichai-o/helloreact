@@ -7,7 +7,7 @@ const App = (props) => {
       <div>
         <Header />
         <div className='container'>
-          <h1>Hello Mao Mao</h1>
+          <h1>Hello Mao</h1>
           <div>
             {props.children}
           </div>

@@ -5,13 +5,14 @@ import webpack from 'webpack'
 export default () => ({  
     entry: [
         'react-hot-loader/patch',
+        'webpack-dev-server/client?http://localhost:8081',
         'webpack/hot/only-dev-server',
-        'webpack-dev-server/client?http://localhost:8080',
-        './ui/index.js'
+        './ui/common/theme/styles.scss',
+        './ui/client/index.js'
     ],
     output: {
-        path: path.resolve(__dirname, 'public'), // Absolute path
-        publicPath: 'public',
+        publicPath: 'http://127.0.0.1:8081/public/',
+        path: path.join(__dirname, 'public'),
         filename: 'js/bundle.js'
     },
     module: {
@@ -27,7 +28,7 @@ export default () => ({
             },
             {
                 test: /\.(sass|scss)$/, //Check for sass or scss file names
-                loader: 'style!css!sass',
+                loader: 'style-loader!css-loader!sass-loader',
             }
         ],
     },
@@ -36,11 +37,12 @@ export default () => ({
         hot: true,
         inline: false,
         historyApiFallback: true,
-        proxy: {
+        headers: { "Access-Control-Allow-Origin": "*" }
+        /*proxy: {
             '/api/*': {
                 target: 'http://127.0.0.1:5000'
             }
-        }
+        }*/
     },
     plugins: [
         /*new HtmlWebpackPlugin({
