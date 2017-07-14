@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
       //state.push(action.page)
       // จากนั้นก็โยน previous state ที่ผ่านการรุมยำเรียบร้อยแล้วออกไป
       //console.log(action.pages);
-      return Object.assign({}, state, { data: action.pages, message: 'success'  })
+      return Object.assign({}, state, { message: 'success', data: action.pages })
     case 'LOAD_PAGES_REQUEST':
       return Object.assign({}, state, { message: 'waiting' });
     case 'LOAD_PAGES_FAILURE':

@@ -12,7 +12,7 @@ class Pages extends Component {
 	}
 
     shouldComponentUpdate(nextProps) {
-        return this.props.pages !== nextProps.pages;
+        return this.props.pages !== nextProps.pages
     }
 
     onReloadPages(a) {
@@ -20,7 +20,7 @@ class Pages extends Component {
     }
 
     componentDidMount() {
-        this.onReloadPages(1) 
+        this.onReloadPages(1)
     }
 
     render() {
@@ -50,8 +50,10 @@ class Pages extends Component {
     }
 }
 
+Pages.need = [ loadPages ]
+
 const mapStateToProps = (state) => ({
-  pages: state.pages.data
+    pages: state.pages.data
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -7,6 +7,8 @@ import configureStore from '../common/store/configureStore'
 import Root from '../common/components/Root'
 import getRoutes from '../common/routes'
 import { Provider } from 'react-redux'
+import { fetchComponent } from './fetchComponent.js'
+
 // แยกส่วนที่ใช้สร้าง HTML ออกมาเป็นฟังก์ชัน
 // รับพารามิเตอร์หนึ่งตัวคือ HTML
 const renderHtml = (html, initialState) => (`
@@ -82,11 +84,36 @@ export default function(req, res) {
       // แต่ถ้าเจอว่าเป็นการ redirect ก็ให้ redirect ไปที่ path ใหม่
       res.redirect(302, `${redirectLocation.pathname}${redirectLocation.search}`)
     } else if (renderProps) {
-      res.status(200).send(
+      
+      const { components, params } = renderProps
+
+      // ดึงข้อมูลจาก API Server เสร็จเมื่อไหร่ค่อยนำไปสร้าง HTML
+      fetchComponent(store.dispatch, components, params)
+        .then(html => {
+          const componentHTML = renderToString(
+            <Provider store={store} key='provider'>
+              <RouterContext {...renderProps} />
+            </Provider>
+          )
+          
+          // เรียก getState เพื่อดึงค่าจาก store ปัจจุบันของฝั่งเซิร์ฟเวอร์
+          // state ของเซิร์ฟเวอร์จะอัดฉีดลง store ฝั่ง client ภายหลัง
+          const initialState = store.getState()
+
+          res.status(200).send(
+            renderHtml(componentHTML, initialState)
+          )
+        })
+        .catch(error => {
+          console.log(error)
+          res.status(500).send('Internal Server Error')
+        })
+
+      /*res.status(200).send(
         // ส่ง RouterContext เข้าไปสร้าง HTML ใน renderHtml
         
         renderHtml(renderToString(<Provider store={store}><RouterContext {...renderProps} /></Provider>))
-      )
+      )*/
     } else {
       // ถ้าจับอะไรไม่ได้ซักอย่างก็ 404 Not Found ไปเลย
       res.status(404).send('Not found')
