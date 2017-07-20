@@ -23,12 +23,11 @@ export function fetchComponent(dispatch, components, params) {
         const wrappedComponent = current.WrappedComponent
 
         // เราจะรวบรวมฟังก์ชันที่อยู่ภายใต้ need ของแต่ละ Container Component
-        return (current && current.need)
-        /*return (current.need || [])
-          .concat(
-            (wrappedComponent && wrappedComponent.need) || []
-          )
-          .concat(prev)*/
+        return (current.needs || [])
+          ///.concat(
+          //  (wrappedComponent && wrappedComponent.needs) || []
+          //)
+          //.concat(prev)
           
         }, []
       )
@@ -37,5 +36,5 @@ export function fetchComponent(dispatch, components, params) {
   // จากนั้นจึงคืนค่ากลับออกไปจากฟังก์ชัน
   // อย่าลืมว่าเราต้องมีข้อมูลพร้อมทั้งหมดก่อน ถึงจะแสดงผลได้ด้วย SSR
   // สังเกตว่าเราส่ง params เข้าไปใน need ด้วย นั่นคือในแต่ละฟังก์ชันภายใต้ need ของเราจะเข้าถึง params ได้
-  return Promise.all(needs.map(need => dispatch(need(params))))
+  return Promise.all(needs.map((need) => { console.log(params); return dispatch(need(params)); }))
 }

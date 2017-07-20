@@ -14,6 +14,7 @@ export default (store, history) => {
         <Route path='/' component={App}>
           <IndexRoute component={Home} />
           <route path='pages' component={Pages} />
+          <route path='pages/:id' component={Pages} />
         </Route>
       </Router>
   )

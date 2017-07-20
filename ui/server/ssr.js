@@ -86,7 +86,7 @@ export default function(req, res) {
     } else if (renderProps) {
       
       const { components, params } = renderProps
-
+      
       // ดึงข้อมูลจาก API Server เสร็จเมื่อไหร่ค่อยนำไปสร้าง HTML
       fetchComponent(store.dispatch, components, params)
         .then(html => {

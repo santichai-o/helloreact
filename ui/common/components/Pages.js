@@ -7,8 +7,8 @@ import { loadPages } from '../actions/page'
 
 class Pages extends Component {
     constructor(props, context) {
-		super(props,context);
-		this.props = props;
+		super(props,context)
+		this.props = props
 	}
 
     shouldComponentUpdate(nextProps) {
@@ -20,6 +20,8 @@ class Pages extends Component {
     }
 
     componentDidMount() {
+        const params = { xxxxx: '' }
+
         this.onReloadPages(1)
     }
 
@@ -50,7 +52,7 @@ class Pages extends Component {
     }
 }
 
-Pages.need = [ loadPages ]
+Pages.needs = [ loadPages ]
 
 const mapStateToProps = (state) => ({
     pages: state.pages.data
