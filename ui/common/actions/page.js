@@ -1,23 +1,25 @@
-import fetch from 'isomorphic-fetch'
+import axios from 'axios'
 import { API_ROOT } from '../components/endpoints'
 
-export const loadPages = () => {
+export const loadPage = (page) => {
     return (dispatch, getState) => {
         dispatch({
-            type: 'LOAD_PAGES_REQUEST'
+            type: 'LOAD_PAGE_REQUEST'
         })
 
-        //console.log(API_ROOT+'/pages')
-        return fetch(API_ROOT+'/pages')
-            .then((response) => response.json())
-            .then(
-                (pages) => dispatch({
-                    type: 'LOAD_PAGES_SUCCESS',
-                    pages
-                }),
-                (error) => dispatch({
-                    type: 'LOAD_PAGES_FAILURE'
-                })
-            )
+        return axios.post(API_ROOT,  {
+            query: `{ content(id:${page.id}) {id, title, description} }`
+        })
+        .then(response => { 
+            let result = response.data
+
+            return dispatch({
+                type: 'LOAD_PAGE_SUCCESS',
+                page: result.data.content
+            })
+        })
+        .catch(err => dispatch({
+            type: 'LOAD_PAGE_FAILURE'
+        }))
     }
 }

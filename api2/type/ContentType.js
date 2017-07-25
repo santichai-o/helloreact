@@ -13,10 +13,10 @@ export default new GraphQLObjectType({
       },
       title: {
         type: GraphQLString
-      }/* ,
+      },
       description: {
         type: GraphQLString
-      } */
+      } 
     }
   }
 })

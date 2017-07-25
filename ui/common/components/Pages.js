@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import fetch from 'isomorphic-fetch'
-import Page from './Page'
+import PageItem from './PageItem'
 import { API_ROOT } from './endpoints'
-import { loadPages } from '../actions/page'
+import { loadPages } from '../actions/pages.js'
 
 class Pages extends Component {
     constructor(props, context) {
@@ -15,22 +14,18 @@ class Pages extends Component {
         return this.props.pages !== nextProps.pages
     }
 
-    onReloadPages(a) {
+    onReloadPages() {
        this.props.onLoadPages()
     }
 
     componentDidMount() {
-        const params = { xxxxx: '' }
-
-        this.onReloadPages(1)
+        this.onReloadPages()
     }
 
     render() {
         return (
             <div>
-                <button className='button' onClick={() => this.onReloadPages(1)}>
-                    Reload Pages
-                </button>
+                <button className='button' onClick={() => this.onReloadPages(1)}>Reload Pages</button>
                 <table className='table'>
                     <thead>
                     <tr>
@@ -42,7 +37,7 @@ class Pages extends Component {
                     <tbody>
                     {
                         this.props.pages.map(
-                            (page) => <Page key={page.id} page={page} onPageEdit={this.onReloadPages.bind(this)} />
+                            (page) => <PageItem key={page.id} page={page} />
                         )
                     }
                     </tbody>
@@ -59,7 +54,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoadPages: (a) => dispatch(loadPages(a))
+  onLoadPages: () => dispatch(loadPages())
 })
 
 export default connect(

@@ -16,6 +16,20 @@ export const getContents = {
     }
 }
 
+export const getContent = {
+    description: "Get content",
+    type: ContentType,
+    args: {
+        id: {
+            name: 'ID',
+            type: new GraphQLNonNull(GraphQLInt)
+        }
+    },
+    resolve: (root, { id }) => {
+        return Db.models.contents.findById(id)
+    }
+}
+
 export const addContent = {
     type: ContentType,
     description: 'Add new content',

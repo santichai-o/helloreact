@@ -8,7 +8,7 @@ export default class Header extends Component {
       <header>
         <FlashMessage />
         <nav>
-            <Link to={{ pathname: '/' }}>Babel Coder Wiki!</Link>
+            <Link to={{ pathname: '/' }}>Hello React</Link>
             <ul>
                 <li>
                     <Link to={{ pathname: '/pages' }}>All pages</Link>

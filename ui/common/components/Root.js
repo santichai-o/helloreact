@@ -17,17 +17,3 @@ export default class Root extends React.Component  {
     )
   }
 }
-
-/*
-import React from 'react'
-import routes from '../routes'
-
-export default class Root extends React.Component {
-  render() {
-    return (
-      <div>
-        {routes()}
-      </div>
-    )
-  }
-}*/

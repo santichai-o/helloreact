@@ -7,12 +7,13 @@ import {
   GraphQLList
 } from 'graphql/type'
 
-import { getContents, addContent } from './service/contents'
+import { getContent, getContents, addContent } from './service/contents'
 
 let queryType = new GraphQLObjectType({
   name: 'Query',
   fields: {
-    contents: getContents
+    contents: getContents,
+    content: getContent
   }
 })
 

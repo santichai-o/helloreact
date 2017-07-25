@@ -5,8 +5,9 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import {
   App,
   Home,
-  Pages
-} from './components/index.js'
+  Pages,
+  Page
+} from './components'
 
 export default (store, history) => {
   return (
@@ -14,7 +15,7 @@ export default (store, history) => {
         <Route path='/' component={App}>
           <IndexRoute component={Home} />
           <route path='pages' component={Pages} />
-          <route path='pages/:id' component={Pages} />
+          <route path='page/:id' component={Page} />
         </Route>
       </Router>
   )

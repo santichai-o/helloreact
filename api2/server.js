@@ -9,7 +9,7 @@ let app  = express()
 let HOST = '127.0.0.1'
 let PORT = 5000
 
-app.use('/graphql', GraphHTTP({
+app.use('/api/v1', GraphHTTP({
   schema: schema,
   pretty: true,
   graphiql: true
