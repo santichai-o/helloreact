@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-//import styles from './Home.scss'
 
 class Home extends Component {
   render() {
     return (
-      <h2>
-        Welcome to BabelCoder Wiki!
-      </h2>
+      <div id="home" className="content">
+        <h1>
+          Hello World.
+        </h1>
+      </div>
     )
   }
 }

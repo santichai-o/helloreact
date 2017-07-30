@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PageItem from './PageItem'
-import { API_ROOT } from './endpoints'
-import { loadPages } from '../actions/pages.js'
+import { API_ROOT } from '../endpoints'
+import { loadPages } from '../actions'
 
 class Pages extends Component {
     constructor(props, context) {
@@ -24,9 +24,14 @@ class Pages extends Component {
 
     render() {
         return (
-            <div>
-                <button className='button' onClick={() => this.onReloadPages(1)}>Reload Pages</button>
-                <table className='table'>
+            <div id="pages" className="content">
+                <h1>Pages</h1>
+
+                <div className="tools">
+                    <button className='button' onClick={() => this.onReloadPages(1)}>Reload Pages</button>
+                </div>
+
+                <table>
                     <thead>
                     <tr>
                         <th>ID</th>
@@ -50,7 +55,7 @@ class Pages extends Component {
 Pages.needs = [ loadPages ]
 
 const mapStateToProps = (state) => ({
-    pages: state.pages.data
+    pages: state.pages
 })
 
 const mapDispatchToProps = (dispatch) => ({

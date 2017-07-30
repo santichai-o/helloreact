@@ -5,7 +5,7 @@ import {
   GraphQLInt
 } from 'graphql/type'
 
-import Db from '../db.js'
+import Db from '../../db/db.js'
 import ContentType from '../type/ContentType'
 
 export const getContents = {

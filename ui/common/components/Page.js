@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { API_ROOT } from './endpoints'
-import { loadPage } from '../actions/page.js'
-import PageContent from './PageContent'
+import { API_ROOT } from '../endpoints'
+import { loadPage } from '../actions'
 
 class Page extends React.Component {
     constructor(props, context) {
@@ -25,12 +24,12 @@ class Page extends React.Component {
     }
     
     render() {
-        if (this.props.page)
-            return(
-                <PageContent page={this.props.page}></PageContent>
-            )
-        else
-            return(<div/>)
+        return (
+            <div id="page" className="content">
+                <h1>{ this.props.page.title }</h1>
+                <div className="content-body">{ this.props.page.description }</div>
+            </div>
+        )
     }
 }
 

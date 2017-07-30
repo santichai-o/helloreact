@@ -6,7 +6,8 @@ import {
   App,
   Home,
   Pages,
-  Page
+  Page,
+  AboutUs
 } from './components'
 
 export default (store, history) => {
@@ -16,6 +17,7 @@ export default (store, history) => {
           <IndexRoute component={Home} />
           <route path='pages' component={Pages} />
           <route path='page/:id' component={Page} />
+          <route path='aboutus' component={AboutUs} />
         </Route>
       </Router>
   )

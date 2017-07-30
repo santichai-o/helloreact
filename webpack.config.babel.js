@@ -7,7 +7,7 @@ export default () => ({
         'react-hot-loader/patch',
         'webpack-dev-server/client?http://localhost:8081',
         'webpack/hot/only-dev-server',
-        './ui/common/theme/styles.scss',
+        //'./ui/common/theme/styles.scss',
         './ui/client/index.js'
     ],
     output: {

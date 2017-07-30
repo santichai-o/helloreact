@@ -2,18 +2,28 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 const FlashMessage = (props) => {
-    if (props.message == '')
+    if (props.status.state == 0)
         return null
-    else
-        return(<div className="flash-message">{props.message}</div>)
+    else if (props.status.state == 1)
+        return(
+            <div className="flash-message loading">
+                <span>loading...</span>
+            </div>
+        )
+    else if (props.status.state == 2)
+        return(
+            <div className="flash-message load-fail">
+                <span>{ props.status.message }</span>
+            </div>
+        )
 };
 
 FlashMessage.shouldComponentUpdate = (nextProps) => {
-    return this.props.message !== nextProps.message;
+    return this.props.status !== nextProps.status
 }
 
 const mapStateToProps = (state) => ({
-    message: state.pages.message
+    status: state.status
 })
 
 export default connect(
