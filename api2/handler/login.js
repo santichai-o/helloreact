@@ -1,7 +1,7 @@
 import jwt from 'jwt-simple'
 
 import config from '../../config.js'
-import Db from '../db/db.js'
+import models from '../models'
 
 export const getIndex = (req, res) => {
   res.render('index', {locals: { path: req.path }})
@@ -18,7 +18,7 @@ export const portLogin = (req, res) =>{
   let username = req.body.username;
   let password = req.body.password;
 
-  Db.models.users.find({ 
+  models.User.find({ 
     where: { 
       username: username, 
       password: password 

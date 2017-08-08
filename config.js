@@ -1,9 +1,11 @@
 const CONFIG = {
   dev: {
     // database
+    host: '127.0.0.1',
+    port: '8080',
     db: {
         host: 'localhost',
-        table: 'test',
+        database: 'test',
         username: 'root',
         password: ''
     },
@@ -12,12 +14,12 @@ const CONFIG = {
   },
   default: {
     // database
-    db: {
+    /* db: {
         host: 'localhost',
-        table: 'test',
+        database: 'test',
         username: 'root',
         password: ''
-    },
+    }, */
     // jwt
     jwtTokenSecret: 'MyS1cr3tK3U'
   }

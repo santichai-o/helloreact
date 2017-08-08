@@ -7,7 +7,8 @@ export const loadPages = () => {
             type: 'LOAD_REQUEST'
         })
 
-        return axios.post(API_ROOT,  {
+        console.log('API_ROOT', API_ROOT)
+        return axios.post(API_ROOT, {
             query: '{ contents {id, title} }'
         })
         .then(response => { 

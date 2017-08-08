@@ -6,9 +6,10 @@
   "scripts": {
     "start": "npm-run-all --parallel start-dev-ui start-dev-ssr",
     "start-dev-api": "json-server --watch api/db.json --routes api/routes.json --port 5000",
-    "start-dev-ui": "webpack-dev-server --port 8081",
-    "start-dev-ssr": "nodemon ./ui/server/index.js",
-    "start-dev-api2": "nodemon ./api2/index.js"
+    "start-dev-ui": "webpack-dev-server --host 127.0.0.1 --port 8081",
+    "start-dev-ssr": "NODE_ENV=dev nodemon ./ui/server/index.js",
+    "start-dev-api2": "NODE_ENV=dev nodemon ./api2/index.js",
+    "gulp": "NODE_ENV='dev' gulp"
   },
   "author": "",
   "license": "ISC",

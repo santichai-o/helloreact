@@ -1,14 +1,14 @@
 import { Strategy, ExtractJwt } from 'passport-jwt'
 
 import config from '../../config.js'
-import Db from '../db/db.js'
+import models from '../models'
 
 let opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeader()
 opts.secretOrKey = config.jwtTokenSecret
 
 export default new Strategy(opts, (payload, done) => {
-    Db.models.users.findById(payload.id).then( (resutl) => {
+    models.User.findById(payload.id).then( (resutl) => {
         if (!resutl) 
             return done(null, false, 'user not found')
 

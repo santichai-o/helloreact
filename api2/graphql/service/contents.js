@@ -5,14 +5,14 @@ import {
   GraphQLInt
 } from 'graphql/type'
 
-import Db from '../../db/db.js'
+import models from '../../models'
 import ContentType from '../type/ContentType'
 
 export const getContents = {
     description: "Get all contents",
     type: new GraphQLList(ContentType),
     resolve: () => {
-        return Db.models.contents.findAll()
+        return models.Content.findAll()
     }
 }
 
@@ -26,7 +26,7 @@ export const getContent = {
         }
     },
     resolve: (root, { id }) => {
-        return Db.models.contents.findById(id)
+        return models.Content.findById(id)
     }
 }
 
@@ -44,7 +44,7 @@ export const addContent = {
         }
     },
     resolve: (root, { title, description }) => {
-        return Db.models.contents.create({
+        return models.Content.create({
             title,
             description
         })

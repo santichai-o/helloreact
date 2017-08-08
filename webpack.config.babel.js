@@ -5,7 +5,7 @@ import webpack from 'webpack'
 export default () => ({  
     entry: [
         'react-hot-loader/patch',
-        'webpack-dev-server/client?http://localhost:8081',
+        'webpack-dev-server/client?http://127.0.0.1:8081',
         'webpack/hot/only-dev-server',
         //'./ui/common/theme/styles.scss',
         './ui/client/index.js'
@@ -37,12 +37,12 @@ export default () => ({
         hot: true,
         inline: false,
         historyApiFallback: true,
-        headers: { "Access-Control-Allow-Origin": "*" }
-        /*proxy: {
-            '/api/*': {
+        headers: { "Access-Control-Allow-Origin": "*" } ,
+        proxy: {
+            '/api/v1*': {
                 target: 'http://127.0.0.1:5000'
             }
-        }*/
+        } 
     },
     plugins: [
         /*new HtmlWebpackPlugin({

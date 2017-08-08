@@ -1,38 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      body {
-        height: 100%;
-        margin: 0;
-        width: 100%;
-        overflow: hidden;
-      }
-      #graphiql {
-        height: 100vh;
-      }
-      .jwt-token {
-        background: linear-gradient(#f7f7f7, #e2e2e2);
-        border-bottom: 1px solid #d0d0d0;
-        font-family: system, -apple-system, 'San Francisco', '.SFNSDisplay-Regular', 'Segoe UI', Segoe, 'Segoe WP', 'Helvetica Neue', helvetica, 'Lucida Grande', arial, sans-serif;
-        padding: 7px 14px 6px;
-        font-size: 14px;
-      }
-      #jwt-token {
-        font-size: 14px;
-        width: 300px;
-      }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/graphiql/0.10.2/graphiql.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react-dom.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/graphiql/0.10.2/graphiql.js"></script>
+    <link rel="stylesheet" href="/css/graphiql.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/fetch.min.js"></script>
+    <script src="/js/react.min.js"></script>
+    <script src="/js/react-dom.min.js"></script>
+    <script src="/js/graphiql.js"></script>
   </head>
   <body>
     <div class="jwt-token">
-      <label for="jwt-token">JWT Token: </label>
+      <label for="jwt-token">Token: </label>
       <input id="jwt-token" placeholder="JWT Token goes here" />
+      <button id="getToken">Get Token</button>
     </div>
     <div id="graphiql">Loading...</div>
     <script>
