@@ -11,7 +11,8 @@ const sequelize = new Sequelize(
     config.db.password, 
     {
         dialect: 'mysql',
-        host: config.db.host
+        host: config.db.host,
+        logging: false
     }
 )
     
