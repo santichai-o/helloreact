@@ -1,0 +1,22 @@
+
+#graphiql {
+    height: 100vh;
+}
+
+.graphiql-container .doc-explorer-title, 
+.graphiql-container .history-title { 
+    overflow-x: visible; 
+}
+
+.jwt-token-box {
+    background: linear-gradient(#f7f7f7, #e2e2e2);
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.button-box {
+    padding: 10px 10px 10px 0;
+}
+
+.login-alert.alert {
+    margin: 10px 0 0 0;   
+}

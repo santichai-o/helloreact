@@ -1,20 +1,74 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>GraphiQL</title>
+
     <link rel="stylesheet" href="/css/graphiql.css" />
     <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/ide.css" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <script src="/js/fetch.min.js"></script>
     <script src="/js/react.min.js"></script>
     <script src="/js/react-dom.min.js"></script>
     <script src="/js/graphiql.js"></script>
   </head>
   <body>
-    <div class="jwt-token">
-      <label for="jwt-token">Token: </label>
-      <input id="jwt-token" placeholder="JWT Token goes here" />
-      <button id="getToken">Get Token</button>
+    <div class="jwt-token-box" >
+      <div class="button-box">
+        <div class="flex-group">
+            <div class="col-sm-11">
+              <span id="txt-token" class="form-control" >Token: </span>
+            </div>
+
+            <button class="btn btn-primary col-sm-1" data-toggle="modal" data-target="#modal-login">Get Token</button>
+            
+            <br class="clear" />
+        </div>
+
+        <input id="jwt-token" type="hidden" />
+      </div>
     </div>
+    
+    <div id="modal-login" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Login</h4>
+            <div class="login-alert alert" style="display: none;">
+              
+            </div>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input type="text" class="form-control" id="username">
+            </div>
+            <div class="form-group">
+              <label for="pwd">Password:</label>
+              <input type="password" class="form-control" id="pwd">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="bt-login" type="button" class="btn btn-primary" data-loading-text="<span class='glyphicon-left glyphicon glyphicon-refresh spinning'></span> Processing">Login</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+
     <div id="graphiql">Loading...</div>
+
     <script>
       var search = window.location.search;
       var parameters = {};
@@ -23,6 +77,9 @@
 
       function graphQLFetcher(graphQLParams) {
         const jwtToken = document.getElementById('jwt-token').value;
+
+        document.getElementById('txt-token').textContent = 'Token: ' + jwtToken;
+
         let headers = {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -60,6 +117,53 @@
         }),
         document.getElementById('graphiql')
       );
+
+      $(function () {
+        $('#bt-login').on('click', function() {
+          var $this = $(this);
+
+          $this.button('loading');
+
+          const user = $('#username').val();
+          const pass = $('#pwd').val();
+
+          fetch('${path}/login', {
+            method: 'post',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: user, password:pass })
+          }).then(function (response) {
+            return response.text();
+          }).then(function (responseBody) {
+            try {
+              const result = JSON.parse(responseBody);
+
+              if (!result.error) {
+                const token = result.token;
+                $('#jwt-token').val(token)
+                $('#txt-token').text('Token: '+token)
+                $('.login-alert').text('').hide();
+                $('#modal-login').modal('toggle');
+              } else { // error
+                $('.login-alert').text(result.message).show();
+                console.log('error', result.message);
+              }
+
+              $this.button('reset');
+              return result;
+            } catch (error) {
+              return responseBody;
+            }
+          }).catch(function(error) { 
+            this.button('reset');
+            console.log(error); 
+          });
+          
+        });
+
+      })
     </script>
   </body>
 </html>

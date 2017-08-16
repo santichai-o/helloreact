@@ -13,7 +13,7 @@ export const getLogin = (req, res) => {
 
 export const portLogin = (req, res) =>{
   if(!req.body.username || !req.body.password)
-    res.status(401).json({message:"no such user found"})
+    res.status(401).json({ error: true, message:"no such user found" })
 
   let username = req.body.username;
   let password = req.body.password;
@@ -24,12 +24,16 @@ export const portLogin = (req, res) =>{
       password: password 
     }
   }).then( (result) => {
-    let user = result.dataValues
-    let payload = {id: user.id, meta: 'hello'}
-    let token = jwt.encode(payload, config.jwtTokenSecret);
+    if (!result) {
+      res.status(401).json({ error: true, message:"no such user found" })
+    } else {
+      let user = result.dataValues
+      let payload = {id: user.id, meta: 'hello'}
+      let token = jwt.encode(payload, config.jwtTokenSecret);
 
-    res.json({message: true, token: token });
+      res.json({ token: token });
+    }
   }).error((err) => {
-    res.status(500).json({ message: err.message })
+    res.status(401).json({ error: true, message:"no such user found" })
   })
 }
