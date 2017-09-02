@@ -12,7 +12,7 @@ import schema from './graphql/schema'
 import { getIndex, getLogin, portLogin } from './handler/login'
 
 const isDev = process.env.NODE_ENV === 'dev'
-const HOST = '127.0.0.1'
+const HOST = 'localhost'
 const PORT = 5000
 const app  = express()
 

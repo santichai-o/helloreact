@@ -1,6 +1,7 @@
 
 
 import express from 'express'
+import path from 'path'
 import httpProxy from 'http-proxy'
 import ssr from './ssr'
 
@@ -13,6 +14,8 @@ const proxy = httpProxy.createProxyServer({
   target: targetUrl,
   changeOrigin: true
 })
+
+app.use('/public', express.static(__dirname + '/public')); 
 
 // ถ้า path ที่เข้ามาขึ้นต้นด้วย /api ให้เรียกไปที่ http://127.0.0.1:5000/api
 app.use('/api/v1', (req, res) => {

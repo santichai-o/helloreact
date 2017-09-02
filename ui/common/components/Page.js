@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { browserHistory } from 'react-router';
 import { API_ROOT } from '../endpoints'
 import { loadPage } from '../actions'
 
@@ -22,12 +23,23 @@ class Page extends React.Component {
 
         this.onReloadPage(page)
     }
+
+    navigateBack() {
+        browserHistory.push('/pages')
+    }
     
     render() {
         return (
             <div id="page" className="content">
                 <h1>{ this.props.page.title }</h1>
                 <div className="content-body">{ this.props.page.description }</div>
+                <p>
+                    <button
+                        className="button icon-right"
+                        onClick={this.navigateBack}>
+                        Back
+                    </button>
+                </p>
             </div>
         )
     }

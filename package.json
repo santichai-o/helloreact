@@ -9,6 +9,7 @@
     "start-dev-ui": "webpack-dev-server --host 127.0.0.1 --port 8081",
     "start-dev-ssr": "NODE_ENV=dev nodemon ./ui/server/index.js",
     "start-dev-api2": "NODE_ENV=dev nodemon ./api2/index.js",
+    "start-api2": "NODE_ENV=production node ./api2/index.js",
     "gulp": "NODE_ENV='dev' gulp"
   },
   "author": "",
@@ -16,6 +17,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
     "es6-promise": "^4.1.0",
     "express": "^4.15.3",
     "express-es6-template-engine": "^2.0.1",
